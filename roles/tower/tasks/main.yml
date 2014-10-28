@@ -1,0 +1,2 @@
+- include: download_tower.yml
+- include: setup_tower.yml

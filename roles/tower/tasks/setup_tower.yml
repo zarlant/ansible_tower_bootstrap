@@ -1,0 +1,14 @@
+- name: Setting login password
+  lineinfile: dest={{tower_install_location}}/tower-{{tower_version}}/group_vars/all regexp="^pg_password: " insertafter="^#pg_password: " line="pg_password: {{tower_login_pw}}"
+
+- name: Setting admin password
+  lineinfile: dest={{tower_install_location}}/tower-{{tower_version}}/group_vars/all regexp="^admin_password: " insertafter="^#admin_password: " line="admin_password: {{tower_admin_pw}}"
+
+- name: Setting munin password
+  lineinfile: dest={{tower_install_location}}/tower-{{tower_version}}/group_vars/all regexp="^munin_password: " insertafter="^#munin_password: " line="munin_password: {{tower_munin_pw}}"
+
+- name: Setting rabbit_mq password
+  lineinfile: dest={{tower_install_location}}/tower-{{tower_version}}/group_vars/all regexp="^rabbitmq_password: " insertafter="^#rabbitmq_password: " line="rabbitmq_password: {{tower_rabbit_pw}}"
+
+- name: Run tower setup.sh
+  script: {{tower_install_location}}/tower-{{tower_version}}/setup.sh

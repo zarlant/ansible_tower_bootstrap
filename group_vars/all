@@ -1,0 +1,12 @@
+---
+
+tower_login_pw: "{{ lookup('env','LOGIN_PASS') }}"
+tower_admin_pw: "{{ lookup('env','ADMIN_PASS') }}"
+tower_munin_pw: "{{ lookup('env','MUNIN_PASS') }}"
+tower_rabbit_pw: "{{ lookup('env','RABBIT_PASS') }}"
+
+tower_s3_bucket: "{{ lookup('env','TOWER_S3_BUCKET') }}"
+tower_s3_object: "{{ lookup('env', 'TOWER_S3_OBJECT') }}"
+tower_version: "{{ lookup('env', 'TOWER_VERSION') }}"
+aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY') }}"
+aws_secret_key: "{{ lookup('env','AWS_SECRET_KEY') }}" 
