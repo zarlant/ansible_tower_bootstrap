@@ -12,4 +12,6 @@
 
 #- include '{{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/site.yml'
 - name: Run tower setup.sh
-  shell: 'exec {{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/setup.sh'
+  shell: '{{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/setup.sh'
+  async: 10
+  poll: 0
