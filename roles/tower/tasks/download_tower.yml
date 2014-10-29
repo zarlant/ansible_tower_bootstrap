@@ -12,11 +12,8 @@
 - name: Create tower install tower install directory
   file: path={{tower_install_location}} state=directory
 
-- name: Create tower install version directory
-  file: path={{tower_install_location}}/tower-{{tower_version}} state=directory
-
 - name: Download tower installer version "{{ tower_version }}" from S3
   s3: bucket={{ tower_s3_bucket }} object={{ tower_s3_object }} dest={{tower_install_location}}/tower_installer-{{tower_version}}.tar mode=get
 
 - name: Extract tower installer
-  unarchive: src={{tower_install_location}}/tower_installer-{{tower_version}}.tar dest={{tower_install_location}}/tower-{{tower_version}}
+  unarchive: src={{tower_install_location}}/tower_installer-{{tower_version}}.tar dest={{tower_install_location}}
