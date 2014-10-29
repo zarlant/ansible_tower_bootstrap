@@ -1,9 +1,9 @@
 - name: Install PIP on RedHat
-  yum: name=pip state=latest
+  yum: name=python-pip state=latest
   when: ansible_os_family == "RedHat"
 
 - name: Install PIP on Debian
-  apt: name=pip state=latest
+  apt: name=python-pip state=latest
   when: ansible_os_family == "Debian"
 
 - name: Install BOTO 
