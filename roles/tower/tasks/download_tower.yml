@@ -3,7 +3,7 @@
   when: ansible_os_family == "RedHat"
 
 - name: Install PIP on Debian
-  yum: name=pip state=latest
+  apt: name=pip state=latest
   when: ansible_os_family == "Debian"
 
 - name: Install BOTO 
