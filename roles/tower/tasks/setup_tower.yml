@@ -10,5 +10,6 @@
 - name: Setting rabbit_mq password
   lineinfile: 'dest={{tower_install_location}}/ansible-tower-setup-{{tower_version}}/group_vars/all regexp="^rabbitmq_password: " insertafter="^#rabbitmq_password: " line="rabbitmq_password: {{tower_rabbit_pw}}"'
 
+#- include '{{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/site.yml'
 - name: Run tower setup.sh
-  shell: 'exec {{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/setup.sh >> /tmp/tower_install.log'
+  shell: 'exec {{ tower_install_location | quote }}/ansible-tower-setup-{{tower_version | quote }}/setup.sh'
