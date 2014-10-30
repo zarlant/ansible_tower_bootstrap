@@ -44,14 +44,20 @@ function install_ansible_ubuntu {
 
 function install_ansible_centos_6 {
   yum install -y \
-   http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-   yum install -y ansible git
+  http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  yum install -y python-pip git python-devel gcc
+  mount -o remount,noexec,nosuid,nodev tmpfs
+  pip install ansible
+  mount -a
 }
 
 function install_ansible_centos_7 {
   yum install -y \
-   http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
-   yum install -y ansible git
+  http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
+  yum install -y python-pip git python-devel gcc
+  mount -o remount,noexec,nosuid,nodev tmpfs
+  pip install ansible
+  mount -a
 }
 
 function clone_ansible_bootstrapper {
@@ -69,6 +75,7 @@ function clone_ansible_bootstrapper {
 
 function bootstrap_tower {
   if [ -z $1 ]; then
+    echo "Bootstrapping tower with ansible-playbook"
     ansible-playbook -i /tmp/tower/hosts -c local /tmp/tower/tower.yml
   else
     echo "Running Ansible inside $1"
