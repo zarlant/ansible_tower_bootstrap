@@ -19,14 +19,10 @@ Set the following environment variables:
 * AWS_ACCESS_KEY
 * AWS_SECRET_KEY
 
-Example Environment Variables
-=============================
-
-
 Bootstrap Script
 ================
 
-This playbook was designed to be run locally. You can ssh into your machine, export your variables, and then run this playbook manually, but that's NOT the recommended way to do it.
+This playbook was designed to be run locally. You can ssh into your machine, export your variables, and then run this playbook manually, but that's NOT the recommended way to do it. If you take this bash script and pasted it into your user-data in EC2, it should stand up a tower instance (provided you setup your variables correctly, and have the tower installer in S3).
 
 ```bash
 #! /bin/bash
