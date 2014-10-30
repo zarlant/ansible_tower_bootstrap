@@ -1,7 +1,7 @@
 Ansible Tower Bootstrapper
 =======
 
-This playbook is setup to bootstrap a tower instance into your infrastructure. This is beneficial if you have to setup multiple tower instances for testing, evaluations, or just plain fun!
+This playbook is setup to bootstrap a tower instance into your infrastructure. This is beneficial if you have to setup multiple tower instances for testing, evaluations, or just plain fun! NOTE: I didn't get this working on RedHat 7; I was seeing errors in the Tower installation scripts. 
 
 Variables
 =========
@@ -50,7 +50,7 @@ function install_ansible_centos_6 {
 
 function install_ansible_centos_7 {
   yum install -y \
-  http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
+  http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
   install_ansible_centos
 }
 
@@ -94,12 +94,12 @@ function install_ansible {
          install_ansible_ubuntu
   elif [ $yum -eq "0" ] 
   then
-        release=`cat /etc/issue | grep release | awk '{ print $3 }' | cut -c1`
+        release=`python -mplatform | cut -f7 -d - | cut -c1`
         if [ $release == "6" ]; then
-          echo "Installing ansible Centos 6"
+          echo "Installing ansible on redhat/centos 6"
           install_ansible_centos_6
         elif [  $release == "7" ]; then
-          echo "Installing ansible Centos 7"
+          echo "Installing ansible redhat/centos 7"
           install_ansible_centos_7
         else
           echo "Not 6 or 7, maybe it's amazon and we'll just try the install"
