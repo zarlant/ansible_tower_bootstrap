@@ -22,15 +22,6 @@ Set the following environment variables:
 Example Environment Variables
 =============================
 
-* export LOGIN_PASS=changeme
-* export ADMIN_PASS=reallychangeme!
-* export MUNIN_PASS=usedinternally
-* export RABBIT_PASS=moreinternal
-* export TOWER_S3_BUCKET=my-unique-s3-bucket
-* export TOWER_S3_OBJECT=installs/ansible-tower-setup-latest.tar
-* export TOWER_VERSION=2.0.2
-* export AWS_ACCESS_KEY=myawsaccesskey
-* export AWS_SECRET_KEY=mysuper_secret_access_key
 
 Bootstrap Script
 ================
@@ -39,6 +30,16 @@ This playbook was designed to be run locally. You can ssh into your machine, exp
 
 ```bash
 #! /bin/bash
+
+export LOGIN_PASS=changeme
+export ADMIN_PASS=reallychangeme!
+export MUNIN_PASS=usedinternally
+export RABBIT_PASS=moreinternal
+export TOWER_S3_BUCKET=my-unique-s3-bucket
+export TOWER_S3_OBJECT=installs/ansible-tower-setup-latest.tar
+export TOWER_VERSION=2.0.2
+export AWS_ACCESS_KEY=myawsaccesskey
+export AWS_SECRET_KEY=mysuper_secret_access_key
 
 function install_ansible_ubuntu {
   apt-get install -y python-dev python-yaml python-paramiko python-jinja2 python-pip git-core
@@ -61,7 +62,7 @@ function clone_ansible_bootstrapper {
   if [ -z $1 ]; then
     echo "Cloning playbook to /tmp/tower"
     if [ ! -d "/tmp/tower" ]; then
-      `mkdir /tmp/tower`
+      mkdir /tmp/tower
     fi
     git clone https://github.com/zarlant/ansible_tower_bootstrap.git /tmp/tower
   else
@@ -72,7 +73,7 @@ function clone_ansible_bootstrapper {
 
 function bootstrap_tower {
   if [ -z $1 ]; then
-    `ansible-playbook -i /tmp/tower/hosts -c local /tmp/tower/tower.yml`
+    ansible-playbook -i /tmp/tower/hosts -c local /tmp/tower/tower.yml
   else
     echo "Running Ansible inside $1"
     ansible-playbook -i $1/hosts -c local $1/tower.yml
@@ -105,5 +106,4 @@ function install_ansible {
 install_ansible
 clone_ansible_bootstrapper $1
 bootstrap_tower $1
-
 ```

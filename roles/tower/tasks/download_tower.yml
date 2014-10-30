@@ -1,3 +1,7 @@
+- name: Install libselinux-python on RedHat
+  yum: name=libselinux-python state=latest
+  when: ansible_os_family == "RedHat"
+
 - name: Install PIP on RedHat
   yum: name=python-pip state=latest
   when: ansible_os_family == "RedHat"
