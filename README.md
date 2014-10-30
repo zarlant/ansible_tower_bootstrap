@@ -45,15 +45,16 @@ function install_ansible_ubuntu {
 function install_ansible_centos_6 {
   yum install -y \
   http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-  yum install -y python-pip git python-devel gcc
-  mount -o remount,noexec,nosuid,nodev tmpfs
-  pip install ansible
-  mount -a
+  install_ansible_centos
 }
 
 function install_ansible_centos_7 {
   yum install -y \
   http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
+  install_ansible_centos
+}
+
+function install_ansible_centos {
   yum install -y python-pip git python-devel gcc
   mount -o remount,noexec,nosuid,nodev tmpfs
   pip install ansible
@@ -94,12 +95,15 @@ function install_ansible {
   elif [ $yum -eq "0" ] 
   then
         release=`cat /etc/issue | grep release | awk '{ print $3 }' | cut -c1`
-        if [ $release -eq "6" ]; then
+        if [ $release == "6" ]; then
           echo "Installing ansible Centos 6"
           install_ansible_centos_6
-        elif [  $release -eq "7" ]; then
+        elif [  $release == "7" ]; then
           echo "Installing ansible Centos 7"
           install_ansible_centos_7
+        else
+          echo "Not 6 or 7, maybe it's amazon and we'll just try the install"
+          install_ansible_centos
         fi
   else
           echo "No Support for non Ubuntu/Centos O/S"
